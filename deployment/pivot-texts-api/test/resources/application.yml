@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost/pivot-texts-test
+    username: pivotal
+    password:
+    driver-class-name: org.postgresql.Driver
+
+security:
+  user:
+    name: basic-username
+    password: basic-password
+
+pivots:
+  url: http://localhost:8089/users
+  email: test-email
+  authToken: test-token
