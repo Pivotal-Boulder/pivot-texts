@@ -1,0 +1,24 @@
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
+    compile "org.springframework.boot:spring-boot-starter-jdbc:${springBootVersion}"
+    compile "org.springframework.boot:spring-boot-starter-security:${springBootVersion}"
+
+    compile project(":components/texts-webhook")
+    compile project(":components/pivot-texts-web-service")
+    compile project(":components/texts-data-storage-postgres")
+
+    compile "org.postgresql:postgresql:9.3-1102-jdbc41"
+    compile "org.flywaydb:flyway-core:3.2.1"
+
+    compile "io.springfox:springfox-swagger2:2.0.0"
+    compile 'io.springfox:springfox-swagger-ui:2.0.0'
+
+    testCompile "org.springframework:spring-test:${springVersion}"
+    testCompile "org.mock-server:mockserver-netty:3.9.1"
+
+    testCompile project(":components/db-testing-library")
+}

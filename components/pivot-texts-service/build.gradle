@@ -1,0 +1,4 @@
+dependencies {
+    compile project(":components/pivots-connector")
+    compile project(":components/texts-data-storage")
+}
