@@ -4,6 +4,7 @@ import com.pivotallabs.pivottexts.pivotsconnector.Pivot;
 import com.pivotallabs.pivottexts.pivotsconnector.PivotsSource;
 import com.pivotallabs.pivottexts.textsdatastorage.PivotText;
 import com.pivotallabs.pivottexts.textsdatastorage.PivotTextsDataGateway;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.Optional;
@@ -49,6 +50,8 @@ public class PivotTextsService {
     }
 
     private String last10digits(String phoneNumber) {
+        if (StringUtils.isEmpty(phoneNumber)){ return ""; }
+
         String numbersOnly = phoneNumber.replaceAll("[^\\d]", "");
         return numbersOnly.substring(Math.max(0, numbersOnly.length() - 10));
     }

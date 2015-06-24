@@ -60,6 +60,22 @@ public class PivotTextsServiceTest {
     }
 
     @Test
+    public void testSavingAPivotText_withNullSourceNumbers() {
+        Pivot pivot = new Pivot();
+        pivot.setPhone(null);
+
+        Pivot pivot2 = new Pivot();
+        pivot.setPhone("");
+
+        when(pivotsSource.getPivots()).thenReturn(asList(pivot, pivot2));
+
+        TextMessage text = new TextMessage("+14153358786", "Chicken Pox AGAIN!!!");
+        assertFalse(pivotTextsService.saveText(text));
+
+        verify(dataGateway, never()).save(any());
+    }
+
+    @Test
     public void testSavingAPivotText_whenPivotIsNotFound() {
         when(pivotsSource.getPivots()).thenReturn(new ArrayList<>());
 
