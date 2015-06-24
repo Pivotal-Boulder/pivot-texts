@@ -7,6 +7,7 @@ import com.pivotallabs.pivottexts.pivotsconnector.PivotsSource;
 import com.pivotallabs.pivottexts.pivottextsservice.PivotTextsService;
 import com.pivotallabs.pivottexts.textsdatastorage.PivotTextsDataGateway;
 import com.pivotallabs.pivottexts.textsdatastorage.postgres.PivotTextsPostgresDataGateway;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -25,11 +26,16 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import static org.slf4j.LoggerFactory.getLogger;
+
 @SpringBootApplication
 @ComponentScan("com.pivotallabs")
 @EnableSwagger2
 @EnableCaching
 public class PivotTextsApiApplication {
+
+    private final Logger logger = getLogger(this.getClass());
+
     public static void main(String[] args) {
         SpringApplication.run(PivotTextsApiApplication.class, args);
     }
@@ -63,6 +69,8 @@ public class PivotTextsApiApplication {
             @Override
             @Cacheable("pivots")
             public List<Pivot> getPivots() {
+                logger.debug("getting Pivots");
+
                 return pivotsConnector.getPivots();
             }
         };
