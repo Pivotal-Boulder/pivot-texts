@@ -13,6 +13,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
@@ -47,6 +49,20 @@ public class TwilioTextsControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(content().xml("<Response></Response>"))
         ;
+    }
+
+    @Test
+    public void testSaveMessage_withMissingParams() throws Exception {
+        mockMvc.perform(
+                MockMvcRequestBuilders.post("/twilio-texts")
+                        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                        .param("From", "")
+                        .param("Body", "")
+        )
+                .andExpect(MockMvcResultMatchers.status().isBadRequest())
+        ;
+
+        verify(service, never()).saveText(any());
     }
 
     @Test
