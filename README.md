@@ -17,9 +17,9 @@ Please visit /swagger-ui.html for api docs.
 - Create app configuration
   -- Copy deployment/*/src/resources/application.yml.example to application.yml
 
-## Building
+## Building & Running tests
 
-    ./gradlew
+    ./gradlew clean test
     
 ## Deploying
 
