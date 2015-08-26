@@ -1,4 +1,4 @@
-package com.pivotallabs.pivottexts.webservice;
+package com.pivotallabs.pivottexts.pivottextsservice;
 
 import com.pivotallabs.pivottexts.textsdatastorage.PivotText;
 import com.pivotallabs.pivottexts.textsdatastorage.PivotTextsDataGateway;
@@ -12,12 +12,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import java.time.LocalDateTime;
-
 import static java.util.Arrays.asList;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
 
 public class PivotTextsControllerTest {
@@ -52,13 +48,13 @@ public class PivotTextsControllerTest {
                         .accept(MediaType.APPLICATION_JSON)
         )
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(content().json("[{" +
-                            "pivotId: 32," +
-                            "pivotLocation: \"Boulder\"," +
-                            "pivotFirstName: \"Johnny\"," +
-                            "pivotLastName: \"Doe++\"," +
-                            "message: \"Chicken Pox AGAIN!!!\"," +
-                            "receivedAt: 123" +
+                .andExpect(MockMvcResultMatchers.content().json("[{" +
+                        "pivotId: 32," +
+                        "pivotLocation: \"Boulder\"," +
+                        "pivotFirstName: \"Johnny\"," +
+                        "pivotLastName: \"Doe++\"," +
+                        "message: \"Chicken Pox AGAIN!!!\"," +
+                        "receivedAt: 123" +
                         "}]"))
         ;
     }

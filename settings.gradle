@@ -2,8 +2,6 @@ include "deployment/pivot-texts-api"
 
 include "components/db-testing-library"
 include "components/pivot-texts-service"
-include "components/pivot-texts-web-service"
 include "components/pivots-connector"
 include "components/texts-data-storage"
 include "components/texts-data-storage-postgres"
-include "components/texts-webhook"

@@ -23,9 +23,8 @@ dependencies {
     compile "org.springframework.boot:spring-boot-starter-jdbc:${springBootVersion}"
     compile "org.springframework.boot:spring-boot-starter-security:${springBootVersion}"
 
-    compile project(":components/texts-webhook")
-    compile project(":components/pivot-texts-web-service")
     compile project(":components/texts-data-storage-postgres")
+    compile project(":components/pivot-texts-service")
 
     compile "org.postgresql:postgresql:9.3-1102-jdbc41"
     compile "org.flywaydb:flyway-core:3.2.1"

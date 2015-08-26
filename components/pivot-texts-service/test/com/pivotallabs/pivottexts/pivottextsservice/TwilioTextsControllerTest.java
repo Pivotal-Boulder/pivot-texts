@@ -1,4 +1,4 @@
-package com.pivotallabs.pivottexts;
+package com.pivotallabs.pivottexts.pivottextsservice;
 
 import com.pivotallabs.pivottexts.pivottextsservice.PivotTextsService;
 import com.pivotallabs.pivottexts.pivottextsservice.TextMessage;
@@ -11,6 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.never;
@@ -31,7 +32,7 @@ public class TwilioTextsControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mockMvc = standaloneSetup(controller).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
     }
 
     @Test

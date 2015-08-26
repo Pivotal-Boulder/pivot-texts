@@ -1,4 +1,4 @@
-package com.pivotallabs.pivottexts.webservice;
+package com.pivotallabs.pivottexts.pivottextsservice;
 
 import com.pivotallabs.pivottexts.textsdatastorage.PivotText;
 import com.pivotallabs.pivottexts.textsdatastorage.PivotTextsDataGateway;

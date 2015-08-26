@@ -1,4 +1,4 @@
-package com.pivotallabs.pivottexts;
+package com.pivotallabs.pivottexts.pivottextsservice;
 
 import com.pivotallabs.pivottexts.pivottextsservice.PivotTextsService;
 import com.pivotallabs.pivottexts.pivottextsservice.TextMessage;
