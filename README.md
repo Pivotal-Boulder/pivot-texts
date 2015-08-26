@@ -10,7 +10,7 @@ Please visit /swagger-ui.html for api docs.
 
 ## Setup
 
-* Install with homebrew, then follow instructions on how to have it launch at startup.
+* Install postgres with homebrew, then follow instructions on how to have it launch at startup.
 
 - Create a postgres database super user admin with password 'admin' ```createuser admin --superuser --password```
 - Create postgres databases: ```createdb pivot-texts && createdb pivot-texts-test```
@@ -19,7 +19,10 @@ Please visit /swagger-ui.html for api docs.
 
 ## Building & Running tests
 
+    ./gradlew :deployment/pivot-texts-api:test
     ./gradlew clean test
+
+Run the application tests first to migrate the database. The component tests expect the database to be in a good state.
     
 ## Deploying
 
