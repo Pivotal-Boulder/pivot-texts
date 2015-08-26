@@ -33,3 +33,7 @@ Push to cloud foundry with the following environment:
 - PIVOTS_URL
 - PIVOTS_EMAIL
 - PIVOTS_AUTHTOKEN
+
+## TODO
+
+It would be nice to have an example of a component based front end web application build.
