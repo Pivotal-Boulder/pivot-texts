@@ -1,6 +1,8 @@
 group 'com.pivotallabs.texts'
 version '1.0-SNAPSHOT'
 
+defaultTasks 'clean', 'test'
+
 subprojects {
     apply plugin: 'java'
 
@@ -39,5 +41,5 @@ subprojects {
             java.srcDir 'test'
         }
     }
-
 }
+
