@@ -1,7 +1,2 @@
-include "deployment/pivot-texts-api"
-
-include "components/db-testing-library"
-include "components/pivot-texts-service"
-include "components/pivots-connector"
-include "components/texts-data-storage"
-include "components/texts-data-storage-postgres"
+new File(rootDir, 'deployment').eachDir { dir -> include "deployment/${dir.name}" }
+new File(rootDir, 'components').eachDir { dir -> include "components/${dir.name}" }
