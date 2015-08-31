@@ -1,3 +1,5 @@
+apply from: "${getRootDir()}/java.gradle"
+
 dependencies {
     compile project(":components/texts-data-storage")
     compile "org.springframework:spring-jdbc:${springVersion}"

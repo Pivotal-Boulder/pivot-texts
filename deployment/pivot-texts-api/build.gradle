@@ -18,6 +18,8 @@ jar {
     version = '0.0.1'
 }
 
+apply from: "${getRootDir()}/java.gradle"
+
 dependencies {
     compile "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
     compile "org.springframework.boot:spring-boot-starter-jdbc:${springBootVersion}"
