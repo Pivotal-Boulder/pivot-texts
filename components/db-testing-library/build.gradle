@@ -1,6 +1,8 @@
 apply from: "${getRootDir()}/java.gradle"
 
 dependencies {
-    compile "org.springframework:spring-jdbc:${springVersion}"
-    compile "org.postgresql:postgresql:9.3-1102-jdbc41"
+    compile(
+        "org.springframework:spring-jdbc:${springVersion}",
+        'org.postgresql:postgresql:9.3-1102-jdbc41'
+    )
 }

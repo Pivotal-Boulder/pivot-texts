@@ -1,6 +1,8 @@
 apply from: "${getRootDir()}/java.gradle"
 
 dependencies {
-    compile "org.springframework:spring-web:${springVersion}"
-    compile "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
+    compile(
+        "org.springframework:spring-web:${springVersion}",
+        "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
+    )
 }

@@ -1,0 +1,12 @@
+---
+applications:
+  - name: pivot-texts
+    buildpack: https://github.com/cloudfoundry/java-buildpack.git
+    services:
+      - my_postgres_service
+    env:
+      SECURITY_USER_NAME: fill_me_in
+      SECURITY_USER_PASSWORD: fill_me_in
+      PIVOTS_URL: fill_me_in
+      PIVOTS_EMAIL: fill_me_in
+      PIVOTS_AUTHTOKEN: fill_me_in

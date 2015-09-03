@@ -21,21 +21,25 @@ jar {
 apply from: "${getRootDir()}/java.gradle"
 
 dependencies {
-    compile "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
-    compile "org.springframework.boot:spring-boot-starter-jdbc:${springBootVersion}"
-    compile "org.springframework.boot:spring-boot-starter-security:${springBootVersion}"
+    compile (
+        "org.springframework.boot:spring-boot-starter-web:${springBootVersion}",
+        "org.springframework.boot:spring-boot-starter-jdbc:${springBootVersion}",
+        "org.springframework.boot:spring-boot-starter-security:${springBootVersion}",
 
-    compile project(":components/texts-data-storage-postgres")
-    compile project(":components/pivot-texts-service")
+        "org.postgresql:postgresql:9.3-1102-jdbc41",
+        "org.flywaydb:flyway-core:3.2.1",
 
-    compile "org.postgresql:postgresql:9.3-1102-jdbc41"
-    compile "org.flywaydb:flyway-core:3.2.1"
+        "io.springfox:springfox-swagger2:2.0.0",
+        'io.springfox:springfox-swagger-ui:2.0.0',
 
-    compile "io.springfox:springfox-swagger2:2.0.0"
-    compile 'io.springfox:springfox-swagger-ui:2.0.0'
+        project(":components/texts-data-storage-postgres"),
+        project(":components/pivot-texts-service")
+    )
 
-    testCompile "org.springframework:spring-test:${springVersion}"
-    testCompile "org.mock-server:mockserver-netty:3.9.1"
+    testCompile(
+        "org.springframework:spring-test:${springVersion}",
+        "org.mock-server:mockserver-netty:3.9.1",
 
-    testCompile project(":components/db-testing-library")
+        project(":components/db-testing-library")
+    )
 }
