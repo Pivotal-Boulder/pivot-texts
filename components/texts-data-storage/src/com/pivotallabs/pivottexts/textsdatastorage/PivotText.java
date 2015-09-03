@@ -1,7 +1,5 @@
 package com.pivotallabs.pivottexts.textsdatastorage;
 
-import java.time.LocalDateTime;
-
 public class PivotText {
     private int pivotId;
     private String pivotLocation;

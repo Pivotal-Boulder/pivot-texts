@@ -13,18 +13,21 @@ Please visit `/swagger-ui.html` for api docs.
 
 1. Install postgres: `brew install postgres`
 1. Create a postgres database super user admin with password 'admin': `createuser admin --superuser --password`
-1. Create postgres databases: `createdb pivot-texts && createdb pivot-texts-test
-1. `cp deployment/*/src/resources/application.yml.example application.yml`
+1. Create postgres databases: `createdb pivot-texts && createdb pivot-texts-test`
+1. `cp deployment/pivot-texts-api/src/resources/application.yml.example deployment/pivot-texts-api/src/resources/application.yml`
 
-## Building & Running tests
+## Running
 
-```
-./gradlew :deployment/pivot-texts-api:test
-./gradlew clean test
-```
+1. `gradle bootRun`
+1. Navigate to `http://localhost:8080/pivot-texts/today`
+  1. Log in using details from `deployment/pivot-texts-api/src/resources/application.yml`
 
-Run the application tests first to migrate the database. The component tests expect the database to be in a good state.
-    
+## Running tests
+
+1. Start postgres `postgres -D /usr/local/pgsql/data`
+1. `./gradlew :deployment/pivot-texts-api:test`
+1. `./gradlew clean test`
+
 ## Deploying to Cloud Foundry
 
 1. Create a postgres service

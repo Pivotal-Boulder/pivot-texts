@@ -23,13 +23,16 @@ public class PivotTextsService {
 
         List<Pivot> pivots = pivotsSource.getPivots();
 
+        System.out.println(pivots);
+        System.out.println("hey");
+
         if (pivots == null || pivots.isEmpty()) {
             return false;
         }
 
-        Optional<Pivot> optionalPivot = pivots.stream().filter(p -> {
-            return last10digits(p.getPhone()).equals(cleanFromNumber);
-        }).findFirst();
+        Optional<Pivot> optionalPivot = pivots.stream().filter(p ->
+            last10digits(p.getPhone()).equals(cleanFromNumber)
+        ).findFirst();
 
         if (!optionalPivot.isPresent()) {
             return false;
@@ -50,7 +53,9 @@ public class PivotTextsService {
     }
 
     private String last10digits(String phoneNumber) {
-        if (StringUtils.isEmpty(phoneNumber)){ return ""; }
+        if (StringUtils.isEmpty(phoneNumber)) {
+            return "";
+        }
 
         String numbersOnly = phoneNumber.replaceAll("[^\\d]", "");
         return numbersOnly.substring(Math.max(0, numbersOnly.length() - 10));

@@ -1,12 +1,9 @@
 package com.pivotallabs.pivottexts.pivottextsservice;
 
-import com.pivotallabs.pivottexts.textsdatastorage.PivotText;
-import com.pivotallabs.pivottexts.textsdatastorage.PivotTextsDataGateway;
+import com.pivotallabs.pivottexts.textsdatastorage.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,7 +13,7 @@ public class PivotTextsController {
     @Autowired
     PivotTextsDataGateway dataGateway;
 
-    @RequestMapping(value = "/pivot-texts/today", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
+    @RequestMapping(value = "/pivot-texts/today", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<PivotText> today() {
         return dataGateway.forToday();
     }

@@ -26,10 +26,10 @@ public class PivotsConnectorTest {
         restTemplate = mock(RestTemplate.class);
 
         connector = new PivotsConnector(
-                restTemplate,
-                "https://example.com/users.json",
-                "test-email",
-                "test-auth-token"
+            restTemplate,
+            "https://example.com/users.json",
+            "test-email",
+            "test-auth-token"
         );
     }
 
@@ -37,7 +37,7 @@ public class PivotsConnectorTest {
     public void testGetPivots() {
         Pivot pivot = new Pivot();
         when(restTemplate.getForEntity("https://example.com/users.json?email=test-email&authentication_token=test-auth-token", Pivot[].class))
-                .thenReturn(new ResponseEntity<>(new Pivot[]{pivot}, HttpStatus.OK));
+            .thenReturn(new ResponseEntity<>(new Pivot[]{pivot}, HttpStatus.OK));
 
         List<Pivot> pivots = connector.getPivots();
 
@@ -47,9 +47,8 @@ public class PivotsConnectorTest {
 
     @Test
     public void testGetPivots_withFailure() {
-        Pivot pivot = new Pivot();
         when(restTemplate.getForEntity("https://example.com/users.json?email=test-email&authentication_token=test-auth-token", Pivot[].class))
-                .thenReturn(new ResponseEntity<>((Pivot[]) null, HttpStatus.UNAUTHORIZED));
+            .thenReturn(new ResponseEntity<>((Pivot[]) null, HttpStatus.UNAUTHORIZED));
 
         List<Pivot> pivots = connector.getPivots();
 

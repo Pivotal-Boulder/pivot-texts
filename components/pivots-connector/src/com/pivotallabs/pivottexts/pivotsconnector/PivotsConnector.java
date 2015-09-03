@@ -4,7 +4,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static java.util.Arrays.asList;
@@ -25,8 +24,8 @@ public class PivotsConnector implements PivotsSource {
 
     public List<Pivot> getPivots() {
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(pivotsUrl)
-                .queryParam("email", pivotsEmail)
-                .queryParam("authentication_token", pivotsAuthToken);
+            .queryParam("email", pivotsEmail)
+            .queryParam("authentication_token", pivotsAuthToken);
 
         ResponseEntity<Pivot[]> response = restTemplate.getForEntity(uriBuilder.toUriString(), Pivot[].class);
 
@@ -34,6 +33,6 @@ public class PivotsConnector implements PivotsSource {
             return null;
         }
 
-        return new ArrayList<>(asList(response.getBody()));
+        return asList(response.getBody());
     }
 }
