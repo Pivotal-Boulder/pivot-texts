@@ -41,28 +41,23 @@ public class PivotTextsApiApplication {
     }
 
     @Bean
-    public PivotTextsDataGateway pivotTextsDataGateway(
-            NamedParameterJdbcTemplate namedParameterJdbcTemplate
-    ) {
+    public PivotTextsDataGateway pivotTextsDataGateway(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         return new PivotTextsPostgresDataGateway(namedParameterJdbcTemplate);
     }
 
     @Bean
-    public PivotTextsService pivotTextsService(
-            PivotTextsDataGateway pivotTextsDataGateway,
-            PivotsSource pivotsSource
-    ) {
+    public PivotTextsService pivotTextsService(PivotTextsDataGateway pivotTextsDataGateway, PivotsSource pivotsSource) {
         return new PivotTextsService(pivotTextsDataGateway, pivotsSource);
     }
 
     @Bean
     public PivotsSource pivotsSource(
-            @Value("${pivots.url}") String pivotsUrl,
-            @Value("${pivots.email}") String pivotsEmail,
-            @Value("${pivots.authToken}") String pivotsAuthToken
+        @Value("${pivots.url}") String pivotsUrl,
+        @Value("${pivots.email}") String pivotsEmail,
+        @Value("${pivots.authToken}") String pivotsAuthToken
     ) {
         PivotsConnector pivotsConnector = new PivotsConnector(
-                new RestTemplate(), pivotsUrl, pivotsEmail, pivotsAuthToken
+            new RestTemplate(), pivotsUrl, pivotsEmail, pivotsAuthToken
         );
 
         return new PivotsSource() {
@@ -82,7 +77,7 @@ public class PivotTextsApiApplication {
             @Override
             protected Cache createConcurrentMapCache(String name) {
                 return new ConcurrentMapCache(name,
-                        CacheBuilder.newBuilder().expireAfterWrite(30, TimeUnit.MINUTES).build().asMap(), false);
+                    CacheBuilder.newBuilder().expireAfterWrite(30, TimeUnit.MINUTES).build().asMap(), false);
             }
         };
     }

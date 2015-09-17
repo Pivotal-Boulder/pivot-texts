@@ -1,17 +1,22 @@
 apply from: "${getRootDir()}/java.gradle"
 
 dependencies {
-    compile "org.springframework:spring-webmvc:${springVersion}"
+    compile(
+        "org.springframework:spring-webmvc:${springVersion}",
 
-    compile project(":components/texts-data-storage")
-    compile project(":components/pivots-connector")
+        "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}",
+        "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${jacksonVersion}",
 
-    compile "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
-    compile "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${jacksonVersion}"
-    compile "com.twilio.sdk:twilio-java-sdk:3.4.5"
+        'com.twilio.sdk:twilio-java-sdk:3.4.5',
 
-    testCompile "org.springframework:spring-test:${springVersion}"
-    testCompile "org.skyscreamer:jsonassert:1.2.3"
-    testCompile "javax.servlet:javax.servlet-api:3.1.0"
-    testCompile "xmlunit:xmlunit:1.6"
+        project(':components/texts-data-storage'),
+        project(':components/pivots-connector')
+    )
+
+    testCompile (
+        "org.springframework:spring-test:${springVersion}",
+        'org.skyscreamer:jsonassert:1.2.3',
+        'javax.servlet:javax.servlet-api:3.1.0',
+        'xmlunit:xmlunit:1.6'
+    )
 }

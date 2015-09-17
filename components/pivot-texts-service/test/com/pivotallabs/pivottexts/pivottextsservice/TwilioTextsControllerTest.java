@@ -1,24 +1,15 @@
 package com.pivotallabs.pivottexts.pivottextsservice;
 
-import com.pivotallabs.pivottexts.pivottextsservice.PivotTextsService;
-import com.pivotallabs.pivottexts.pivottextsservice.TextMessage;
-import org.junit.Before;
-import org.junit.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.junit.*;
+import org.mockito.*;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 public class TwilioTextsControllerTest {
     @Mock
@@ -41,27 +32,22 @@ public class TwilioTextsControllerTest {
 
         when(service.saveText(text)).thenReturn(true);
 
-        mockMvc.perform(
-                MockMvcRequestBuilders.post("/twilio-texts")
-                        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-                        .param("From", "+13213459876")
-                        .param("Body", "Had to pick up a latte, I'll be late")
-        )
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(content().xml("<Response></Response>"))
+        mockMvc.perform(post("/twilio-texts")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .param("From", "+13213459876")
+                .param("Body", "Had to pick up a latte, I'll be late"))
+            .andExpect(status().isOk())
+            .andExpect(content().xml("<Response></Response>"))
         ;
     }
 
     @Test
     public void testSaveMessage_withMissingParams() throws Exception {
-        mockMvc.perform(
-                MockMvcRequestBuilders.post("/twilio-texts")
-                        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-                        .param("From", "")
-                        .param("Body", "")
-        )
-                .andExpect(MockMvcResultMatchers.status().isBadRequest())
-        ;
+        mockMvc.perform(post("/twilio-texts")
+            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+            .param("From", "")
+            .param("Body", ""))
+            .andExpect(status().isBadRequest());
 
         verify(service, never()).saveText(any());
     }
@@ -71,15 +57,13 @@ public class TwilioTextsControllerTest {
         when(service.saveText(any())).thenReturn(false);
 
         mockMvc.perform(
-                MockMvcRequestBuilders.post("/twilio-texts")
-                        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-                        .param("From", "+155555555555")
-                        .param("Body", "Had to pick up a latte, I'll be late")
-        )
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(content().xml("<Response>" +
-                        "<Message>We could not display your message. Is your number on Pivots?</Message>" +
-                        "</Response>"))
-        ;
+            post("/twilio-texts")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .param("From", "+155555555555")
+                .param("Body", "Had to pick up a latte, I'll be late"))
+            .andExpect(status().isOk())
+            .andExpect(content().xml("<Response>" +
+                "<Message>We could not display your message. Is your number on Pivots?</Message>" +
+                "</Response>"));
     }
 }

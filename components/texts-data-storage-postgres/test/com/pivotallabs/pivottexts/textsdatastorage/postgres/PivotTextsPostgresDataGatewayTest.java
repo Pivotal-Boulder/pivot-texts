@@ -34,13 +34,13 @@ public class PivotTextsPostgresDataGatewayTest {
         dataGateway.save(pivotText);
 
         Integer matchingCount = testDataSourceFactory.getJdbcTemplate().queryForObject(
-                "SELECT count(*) FROM pivot_texts " +
-                        "WHERE pivot_id = 32 AND " +
-                        "pivot_first_name = 'Johnny' AND " +
-                        "pivot_last_name = 'Doe++' AND " +
-                        "pivot_location = 'Boulder' AND " +
-                        "message = 'Chicken Pox AGAIN!!!';",
-                Integer.class);
+            "SELECT count(*) FROM pivot_texts " +
+                "WHERE pivot_id = 32 AND " +
+                "pivot_first_name = 'Johnny' AND " +
+                "pivot_last_name = 'Doe++' AND " +
+                "pivot_location = 'Boulder' AND " +
+                "message = 'Chicken Pox AGAIN!!!';",
+            Integer.class);
 
         assertThat(matchingCount, equalTo(1));
     }
@@ -48,13 +48,12 @@ public class PivotTextsPostgresDataGatewayTest {
     @Test
     public void testForToday() {
         testDataSourceFactory.getJdbcTemplate().update(
-                "INSERT INTO pivot_texts " +
-                        "(received_at, pivot_id, pivot_first_name, pivot_last_name, pivot_location, message) " +
-                        "VALUES " +
-                        "(now() - INTERVAL '1 day', 10, 'Johnny', 'Doe', 'Boulder', 'Yesterday I was late')," +
-                        "(now() + INTERVAL '1 day', 10, 'Johnny', 'Doe', 'Boulder', 'Tomorrow I will be sick.')," +
-                        "(now(),                    10, 'Johnny', 'Doe', 'Boulder', 'Hey you.');"
-        );
+            "INSERT INTO pivot_texts " +
+                "(received_at, pivot_id, pivot_first_name, pivot_last_name, pivot_location, message) " +
+                "VALUES " +
+                "(now() - INTERVAL '1 day', 10, 'Johnny', 'Doe', 'Boulder', 'Yesterday I was late')," +
+                "(now() + INTERVAL '1 day', 10, 'Johnny', 'Doe', 'Boulder', 'Tomorrow I will be sick.')," +
+                "(now(),                    10, 'Johnny', 'Doe', 'Boulder', 'Hey you.');");
 
         List<PivotText> pivotTexts = dataGateway.forToday();
 

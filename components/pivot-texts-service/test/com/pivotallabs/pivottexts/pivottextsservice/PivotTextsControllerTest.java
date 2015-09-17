@@ -1,19 +1,15 @@
 package com.pivotallabs.pivottexts.pivottextsservice;
 
-import com.pivotallabs.pivottexts.textsdatastorage.PivotText;
-import com.pivotallabs.pivottexts.textsdatastorage.PivotTextsDataGateway;
-import org.junit.Before;
-import org.junit.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import com.pivotallabs.pivottexts.textsdatastorage.*;
+import org.junit.*;
+import org.mockito.*;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import static java.util.Arrays.asList;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
 
 public class PivotTextsControllerTest {
@@ -43,19 +39,16 @@ public class PivotTextsControllerTest {
 
         when(dataGateway.forToday()).thenReturn(asList(pivotText));
 
-        mockMvc.perform(
-                MockMvcRequestBuilders.get("/pivot-texts/today")
-                        .accept(MediaType.APPLICATION_JSON)
-        )
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().json("[{" +
-                        "pivotId: 32," +
-                        "pivotLocation: \"Boulder\"," +
-                        "pivotFirstName: \"Johnny\"," +
-                        "pivotLastName: \"Doe++\"," +
-                        "message: \"Chicken Pox AGAIN!!!\"," +
-                        "receivedAt: 123" +
-                        "}]"))
-        ;
+        String expectedJson = "[{" +
+            "pivotId: 32," +
+            "pivotLocation: \"Boulder\"," +
+            "pivotFirstName: \"Johnny\"," +
+            "pivotLastName: \"Doe++\"," +
+            "message: \"Chicken Pox AGAIN!!!\"," +
+            "receivedAt: 123" +
+            "}]";
+        mockMvc.perform(get("/pivot-texts/today").accept(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk())
+            .andExpect(content().json(expectedJson));
     }
 }

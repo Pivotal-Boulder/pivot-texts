@@ -1,8 +1,12 @@
 apply from: "${getRootDir()}/java.gradle"
 
 dependencies {
-    compile project(":components/texts-data-storage")
-    compile "org.springframework:spring-jdbc:${springVersion}"
+    compile(
+        project(":components/texts-data-storage"),
+        "org.springframework:spring-jdbc:${springVersion}"
+    )
 
-    testCompile project(":components/db-testing-library")
+    testCompile(
+        project(":components/db-testing-library")
+    )
 }
