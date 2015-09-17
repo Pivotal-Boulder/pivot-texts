@@ -13,7 +13,7 @@ public class PivotTextsController {
     @Autowired
     PivotTextsDataGateway dataGateway;
 
-    @RequestMapping(value = "/pivot-texts/today", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/pivot-texts/today", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
     public List<PivotText> today() {
         return dataGateway.forToday();
     }
